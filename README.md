@@ -2,6 +2,18 @@
 
 Welcome to the 4-day series on building Agentic AI applications with LangChain and LangGraph in Node.js.
 
+## Why this Series?
+
+Large Language Models (LLMs) are powerful, but building reliable applications requires more than just a prompt. This series focuses on **Agentic AI**—systems that can reason, use tools, and make decisions to solve complex problems.
+
+By the end of this course, you will understand how to:
+*   Move beyond simple linear chains to cyclic graphs.
+*   Build agents that can browse the web and interact with external APIs.
+*   Orchestrate multiple agents working together.
+*   Implement "human-in-the-loop" workflows for safety and control.
+
+This is essential for developers looking to build production-grade AI applications that are robust, stateful, and capable of autonomous action.
+
 ## Prerequisites
 
 1.  **Node.js**: Ensure you have Node.js installed (v18+ recommended).
