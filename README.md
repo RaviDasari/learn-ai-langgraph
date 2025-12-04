@@ -20,7 +20,7 @@ npm install
 
 This series is designed to take you from basic LLM interactions to building a production-ready, human-in-the-loop agentic workflow.
 
-### [Day 1: Foundations (RAG)](./day1-foundations/README.md)
+### [Day 1: Foundations (RAG)](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day1-foundations/README.md)
 *   **Concepts**: Embeddings, Vector Stores, Retrieval Augmented Generation.
 *   **Goal**: Build a "Smart Reader" that can answer questions about your private data.
 *   **Run**:
@@ -29,7 +29,7 @@ This series is designed to take you from basic LLM interactions to building a pr
     node day1-foundations/2-rag-chain.js
     ```
 
-### [Day 2: Intro to LangGraph (Agents)](./day2-langgraph/README.md)
+### [Day 2: Intro to LangGraph (Agents)](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day2-langgraph/README.md)
 *   **Concepts**: StateGraphs, Nodes, Edges, Conditional Logic, Tools.
 *   **Goal**: Refactor the linear RAG chain into an autonomous Agent that *decides* when to search.
 *   **Run**:
@@ -37,7 +37,7 @@ This series is designed to take you from basic LLM interactions to building a pr
     node day2-langgraph/agent.js
     ```
 
-### [Day 3: Multi-Agent Systems](./day3-multi-agent/README.md)
+### [Day 3: Multi-Agent Systems](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day3-multi-agent/README.md)
 *   **Concepts**: Supervisor Pattern, Specialized Agents, Shared State.
 *   **Goal**: Orchestrate a team of agents (Researcher + Writer) to collaborate on a task.
 *   **Run**:
@@ -45,7 +45,7 @@ This series is designed to take you from basic LLM interactions to building a pr
     node day3-multi-agent/team.js
     ```
 
-### [Day 4: Advanced Patterns (Persistence & Control)](./day4-advanced/README.md)
+### [Day 4: Advanced Patterns (Persistence & Control)](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day4-advanced/README.md)
 *   **Concepts**: Checkpointers (Memory), Interrupts, Human-in-the-loop.
 *   **Goal**: Add "Time Travel" and Human Approval steps to make the agent safe for production.
 *   **Run**:

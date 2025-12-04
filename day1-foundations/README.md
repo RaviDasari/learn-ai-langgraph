@@ -111,3 +111,8 @@ const response = await retrievalChain.invoke({
 
 ## Summary
 You've just built a system that can "read". It doesn't rely on the LLM's training data alone; it uses **your** data. This is the foundation. Tomorrow, we will stop treating this as a linear script and turn it into an **Agent** that can decide *when* to use this knowledge.
+
+## Source Code
+- [1-simple-chat.js](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day1-foundations/1-simple-chat.js)
+- [2-rag-chain.js](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day1-foundations/2-rag-chain.js)
+- [info.txt](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day1-foundations/info.txt)

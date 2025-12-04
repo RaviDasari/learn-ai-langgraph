@@ -4,6 +4,7 @@ Welcome to Day 3. We have a single agent that can use tools. But as tasks get co
 
 The solution is **Multi-Agent Systems**. We break the brain into specialized distinct personas.
 
+
 ## The Architecture: Researcher & Writer
 We will build a graph where two agents collaborate:
 1.  **Researcher**: Has access to search tools. Its system prompt is "You are a researcher...".
@@ -78,3 +79,6 @@ The magic happens in `MessagesAnnotation`.
 4.  Writer generates: "Here is a blog post about X, Y, Z..."
 
 The Writer didn't need to search. It just "read" what the Researcher "wrote" in the shared state. This separation of concerns allows you to tune each agent individually (e.g., set `temperature: 0.8` for the Writer for creativity, but `0` for the Researcher for accuracy).
+
+## Source Code
+- [team.js](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day3-multi-agent/team.js)

@@ -5,6 +5,7 @@ But real life isn't a straight line. Sometimes you need to loop. Sometimes you n
 
 This is where **LangGraph** comes in. It treats your AI application as a **Graph** (nodes and edges) rather than a Chain (a list of steps).
 
+
 ## Core Concepts of LangGraph
 
 ### 1. State
@@ -90,3 +91,6 @@ const app = workflow.compile();
 2.  **Cycles**: If the first search result wasn't good enough, the Agent can decide to search *again* with a different query. A linear chain can't do that.
 
 Tomorrow, we will expand this graph to include multiple agents working together!
+
+## Source Code
+- [agent.js](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day2-langgraph/agent.js)
