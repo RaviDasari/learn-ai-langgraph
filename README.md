@@ -28,6 +28,12 @@ This is essential for developers looking to build production-grade AI applicatio
 npm install
 ```
 
+### Python
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Agenda & Curriculum
 
 This series is designed to take you from basic LLM interactions to building a production-ready, human-in-the-loop agentic workflow.
@@ -39,6 +45,9 @@ This series is designed to take you from basic LLM interactions to building a pr
     ```bash
     node day1-foundations/1-simple-chat.js
     node day1-foundations/2-rag-chain.js
+    # Python
+    python day1-foundations/1-simple-chat.py
+    python day1-foundations/2-rag-chain.py
     ```
 
 ### [Day 2: Intro to LangGraph (Agents)](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day2-langgraph/README.md)
@@ -47,6 +56,8 @@ This series is designed to take you from basic LLM interactions to building a pr
 *   **Run**:
     ```bash
     node day2-langgraph/agent.js
+    # Python
+    python day2-langgraph/agent.py
     ```
 
 ### [Day 3: Multi-Agent Systems](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day3-multi-agent/README.md)
@@ -55,6 +66,8 @@ This series is designed to take you from basic LLM interactions to building a pr
 *   **Run**:
     ```bash
     node day3-multi-agent/team.js
+    # Python
+    python day3-multi-agent/team.py
     ```
 
 ### [Day 4: Advanced Patterns (Persistence & Control)](https://github.com/RaviDasari/learn-ai-langgraph/blob/main/day4-advanced/README.md)
@@ -63,4 +76,6 @@ This series is designed to take you from basic LLM interactions to building a pr
 *   **Run**:
     ```bash
     node day4-advanced/human-loop.js
+    # Python
+    python day4-advanced/human-loop.py
     ```
