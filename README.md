@@ -1,6 +1,6 @@
 # 4-Day LangChain/LangGraph Series
 
-Welcome to the 4-day series on building Agentic AI applications with LangChain and LangGraph in Node.js.
+Welcome to the 4-day series on building Agentic AI applications with LangChain and LangGraph in Node.js and in Python.
 
 ## Why this Series?
 
