@@ -1,6 +1,7 @@
 import sys
 import os
 import asyncio
+import httpx
 from typing import TypedDict, Annotated, List, Union, Literal
 
 # Add the parent directory to sys.path to allow imports from common
@@ -14,11 +15,51 @@ from langgraph.prebuilt import ToolNode
 from langgraph.graph.message import add_messages
 
 # --- Tools ---
-@tool
-def search_tool(query: str) -> str:
-    """Search the web for information."""
-    print(f"[Search Tool] Searching for: {query}")
-    return "LangGraph is a library for building stateful, multi-actor applications with LLMs. It is built on top of LangChain."
+# Check if TAVILY_API_KEY is available
+USE_TAVILY = os.getenv("TAVILY_API_KEY") is not None
+
+if USE_TAVILY:
+    print("[Config] Using TAVILY for search")
+    
+    @tool
+    async def search_tool(query: str) -> str:
+        """Search the web for information."""
+        print(f"[Search Tool - TAVILY] Searching for: {query}")
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                "https://api.tavily.com/search",
+                json={
+                    "api_key": os.getenv("TAVILY_API_KEY"),
+                    "query": query,
+                    "search_depth": "advanced",
+                    "max_results": 3,
+                    "include_answer": True,
+                },
+                headers={"Content-Type": "application/json"}
+            )
+            
+            data = response.json()
+            
+            # Format results for the agent
+            if data.get("answer"):
+                return data["answer"]
+            
+            if data.get("results") and len(data["results"]) > 0:
+                return "\n\n".join([
+                    f"{r['title']}: {r['content']}" 
+                    for r in data["results"]
+                ])
+            
+            return "No results found."
+else:
+    print("[Config] Using mock data for search (TAVILY_API_KEY not found)")
+    
+    @tool
+    def search_tool(query: str) -> str:
+        """Search the web for information."""
+        print(f"[Search Tool - Mock] Searching for: {query}")
+        return "LangGraph is a library for building stateful, multi-actor applications with LLMs. It is built on top of LangChain."
 
 tools = [search_tool]
 tool_node = ToolNode(tools)

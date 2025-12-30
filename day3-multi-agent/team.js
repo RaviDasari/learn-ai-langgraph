@@ -6,17 +6,68 @@ import { z } from "zod";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
 
 // --- Tools ---
-const searchTool = tool(
-    async ({ query }) => {
-        console.log(`[Search Tool] Searching for: ${query}`);
-        return "LangGraph is a library for building stateful, multi-actor applications with LLMs. It is built on top of LangChain.";
-    },
-    {
-        name: "search",
-        description: "Search the web for information.",
-        schema: z.object({ query: z.string() }),
-    }
-);
+// Check if TAVILY_API_KEY is available
+const USE_TAVILY = process.env.TAVILY_API_KEY !== undefined;
+
+let searchTool;
+
+if (USE_TAVILY) {
+    console.log("[Config] Using TAVILY for search");
+    
+    // Custom TAVILY implementation using fetch
+    searchTool = tool(
+        async ({ query }) => {
+            console.log(`[Search Tool - TAVILY] Searching for: ${query}`);
+            
+            const response = await fetch("https://api.tavily.com/search", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    api_key: process.env.TAVILY_API_KEY,
+                    query: query,
+                    search_depth: "advanced",
+                    max_results: 3,
+                    include_answer: true,
+                }),
+            });
+            
+            const data = await response.json();
+            
+            // Format results for the agent
+            if (data.answer) {
+                return data.answer;
+            }
+            
+            if (data.results && data.results.length > 0) {
+                return data.results
+                    .map((r) => `${r.title}: ${r.content}`)
+                    .join("\n\n");
+            }
+            
+            return "No results found.";
+        },
+        {
+            name: "search",
+            description: "Search the web for information.",
+            schema: z.object({ query: z.string().describe("The search query") }),
+        }
+    );
+} else {
+    console.log("[Config] Using mock data for search (TAVILY_API_KEY not found)");
+    searchTool = tool(
+        async ({ query }) => {
+            console.log(`[Search Tool - Mock] Searching for: ${query}`);
+            return "LangGraph is a library for building stateful, multi-actor applications with LLMs. It is built on top of LangChain.";
+        },
+        {
+            name: "search",
+            description: "Search the web for information.",
+            schema: z.object({ query: z.string() }),
+        }
+    );
+}
 
 const tools = [searchTool];
 const toolNode = new ToolNode(tools);
@@ -76,9 +127,9 @@ const run = async () => {
 
     const app = workflow.compile();
 
-    console.log("User: Research LangGraph and write a blog post.");
+    console.log("User: Research LangGraph and write a blog post (what is the latest version?).");
     const result = await app.invoke({
-        messages: [new HumanMessage("Research LangGraph and write a blog post.")],
+        messages: [new HumanMessage("Research LangGraph and write a blog post (what is the latest version?).")],
     });
 
     console.log("\nFinal Result (Last Message):");

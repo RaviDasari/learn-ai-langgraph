@@ -1,4 +1,4 @@
-LangGraph (latest v1.5) is a library for building stateful, multi-actor applications with LLMs, built on top of (and intended to be used with) LangChain.
+LangGraph (latest v0.0.23) is a library for building stateful, multi-actor applications with LLMs, built on top of (and intended to be used with) LangChain.
 It extends the LangChain Expression Language with the ability to coordinate multiple chains (or actors) across multiple steps of computation in a cyclic manner.
 LangGraph is inspired by Pregel and Apache Beam.
 The main use case is for adding cycles to your LLM application.
