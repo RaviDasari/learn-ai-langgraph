@@ -56,14 +56,30 @@ const run = async () => {
         combineDocsChain,
     });
 
-    // 6. Invoke
-    console.log("Asking: What is LangGraph inspired by?");
-    const response = await retrievalChain.invoke({
-        input: "What is LangGraph inspired by?",
-    });
+    const askQuestion = makeAskQuestion(retrievalChain);
 
-    console.log("\nAnswer:");
-    console.log(response.answer);
+    // 6. Invoke
+    await askQuestion("What is LangGraph?");
+    await askQuestion("What is latest version of LangGraph?");
+    await askQuestion("What is LangGraph inspired by?");
 };
+
+function makeAskQuestion(retrievalChain) {
+    return async function askQuestion(question) {
+        console.log("\n\n-------------\nAsking: " + question);
+        let response = await retrievalChain.invoke({
+            input: question,
+        });
+
+        console.log("\nRetrieved Documents:");
+        response.context.forEach((doc, index) => {
+            console.log(`\nDocument ${index + 1}:`);
+            console.log(doc.pageContent);
+        });
+
+        console.log("\nAnswer:");
+        console.log(response.answer);
+    }
+}
 
 run().catch(console.error);

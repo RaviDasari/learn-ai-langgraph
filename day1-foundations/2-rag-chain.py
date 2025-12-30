@@ -58,14 +58,24 @@ async def run():
         combine_docs_chain=combine_docs_chain,
     )
 
-    # 6. Invoke
-    print("Asking: What is LangGraph inspired by?")
-    response = await retrieval_chain.ainvoke({
-        "input": "What is LangGraph inspired by?",
-    })
+    async def ask_question(question):
+        print(f"\n\n-------------\nAsking: {question}")
+        response = await retrieval_chain.ainvoke({
+            "input": question,
+        })
 
-    print("\nAnswer:")
-    print(response["answer"])
+        print("\nRetrieved Documents:")
+        for index, doc in enumerate(response["context"], 1):
+            print(f"\nDocument {index}:")
+            print(doc.page_content)
+
+        print("\nAnswer:")
+        print(response["answer"])
+
+    # 6. Invoke
+    await ask_question("What is LangGraph?")
+    await ask_question("What is latest version of LangGraph?")
+    await ask_question("What is LangGraph inspired by?")
 
 if __name__ == "__main__":
     asyncio.run(run())

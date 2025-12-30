@@ -9,14 +9,18 @@ from langchain_core.messages import HumanMessage, SystemMessage
 import asyncio
 
 async def run():
-    model = get_model()
+    await ask_question("What is LangGraph?")
+    await ask_question("What is the latest version of LangGraph?")
+    await ask_question("What is LangGraph inspired by?")
 
+async def ask_question(question):
+    model = get_model()
     messages = [
         SystemMessage(content="You are a helpful assistant."),
-        HumanMessage(content="What is LangGraph?"),
+        HumanMessage(content=question),
     ]
 
-    print("Sending request to LLM...")
+    print('\n\n----------------\n' + question)
     response = await model.ainvoke(messages)
 
     print("\nResponse:")

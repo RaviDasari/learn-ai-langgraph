@@ -30,7 +30,10 @@ const run = async () => {
     const lookupPolicy = tool(
         async ({ query }) => {
             const docs = await retriever.invoke(query);
-            return docs.map((d) => d.pageContent).join("\n\n");
+            const content = docs.map((d) => d.pageContent).join("\n\n");
+            // console.log("\n[Tool] Retrieved Documents:");
+            // console.log(content);
+            return content;
         },
         {
             name: "lookup_policy",
@@ -72,9 +75,9 @@ const run = async () => {
     const app = workflow.compile();
 
     // --- Run ---
-    console.log("User: What is LangGraph inspired by?");
+    console.log("User: What is LangGraph inspired by? What is the latest version available?");
     const result = await app.invoke({
-        messages: [new HumanMessage("What is LangGraph inspired by?")],
+        messages: [new HumanMessage("What is LangGraph inspired by? What is the latest version available?")],
     });
 
     console.log("\nFinal Response:");
